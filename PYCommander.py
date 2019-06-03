@@ -12,6 +12,9 @@ class Viewer():
     def change_current_directory(self, target_directory):
         os.chdir(target_directory)
 
+    def clear(self,):
+        print(chr(27) + "[2J")
+
 
 system_errors_logo = '[PYCOMMANDER] -'
 viewer = Viewer()
@@ -26,5 +29,7 @@ while True:
     elif command[0] == 'exit':
         print('\nBye!')
         exit()
+    elif command[0] == 'clear':
+        viewer.clear()
     else:
         print(f'{system_errors_logo} Unknown command!')
