@@ -38,7 +38,9 @@ command_list = {
 while True:
     current_directory = os.getcwd()
     input_prefix = f'{current_directory} $> '
-    command, *attrs = input(input_prefix).split()
-    if command != '':
-        call_program = command_list.get(command, viewer.default)
-        call_program(*attrs)
+    try:
+        command, *attrs = input(input_prefix).split()
+    except ValueError:
+        continue
+    call_program = command_list.get(command, viewer.default)
+    call_program(*attrs)
