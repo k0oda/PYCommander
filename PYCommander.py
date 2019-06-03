@@ -9,12 +9,16 @@ class Viewer():
         for file in file_list:
             print(file)
 
-    def change_directory(self, target_directory):
+    def change_current_directory(self, target_directory):
         os.chdir(target_directory)
 
 
 viewer = Viewer()
 while True:
-    input_prefix = f'{os.path.abspath(os.curdir)} $> '
-    directory = input(input_prefix)
-    viewer.list_files(directory)
+    current_directory = os.path.abspath(os.curdir)
+    input_prefix = f'{current_directory} $> '
+    command = input(input_prefix).split()
+    if command[0] == 'lf':
+        viewer.list_files(current_directory)
+    elif command[0] == 'ccd':
+        viewer.change_current_directory(command[1])
