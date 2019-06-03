@@ -23,3 +23,8 @@ while True:
         viewer.list_files(current_directory)
     elif command[0] == 'ccd':
         viewer.change_current_directory(command[1])
+    elif command[0] == 'exit':
+        print('\nBye!')
+        exit()
+    else:
+        print(f'{system_errors_logo} Unknown command!')
