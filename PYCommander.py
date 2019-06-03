@@ -7,7 +7,15 @@ class Viewer():
     def list_files(self,):
         file_list = os.listdir(os.curdir)
         for file in file_list:
-            print(file)
+            if os.path.isdir(file):
+                type = 'Dir'
+            elif os.path.isfile(file):
+                type = 'File'
+            elif os.path.islink(file):
+                type = 'Link'
+            elif os.path.ismount(file):
+                type = 'Mount'
+            print(f'{file} | {type} | {os.path.getsize(file)} bytes')
 
     def change_current_directory(self, *args):
         if os.path.exists(args[0]):
