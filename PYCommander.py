@@ -19,7 +19,7 @@ class Viewer():
         print('Logout...')
         exit()
 
-    def default(self,):
+    def default(self, *_args):
         print(f'[PYCOMMANDER] - Unknown command!')
 
 
