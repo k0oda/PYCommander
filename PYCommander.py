@@ -10,7 +10,10 @@ class Viewer():
             print(file)
 
     def change_current_directory(self, *args):
-        os.chdir(args[0])
+        if os.path.exists(args[0]):
+            os.chdir(args[0])
+        else:
+            print(f'[PYCOMMANDER] - Folder not found!')
 
     def clear(self,):
         print(chr(27) + "[2J")
