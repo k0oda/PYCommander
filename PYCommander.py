@@ -13,6 +13,7 @@ class Viewer():
         os.chdir(target_directory)
 
 
+system_errors_logo = '[PYCOMMANDER] -'
 viewer = Viewer()
 while True:
     current_directory = os.path.abspath(os.curdir)
