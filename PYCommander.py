@@ -4,32 +4,38 @@ import os
 
 
 class Viewer():
-    def list_files(self, working_directory,):
-        file_list = os.listdir(working_directory)
+    def list_files(self,):
+        file_list = os.listdir(os.curdir)
         for file in file_list:
             print(file)
 
-    def change_current_directory(self, target_directory):
-        os.chdir(target_directory)
+    def change_current_directory(self, *args):
+        os.chdir(args[0])
 
     def clear(self,):
         print(chr(27) + "[2J")
 
-
-system_errors_logo = '[PYCOMMANDER] -'
-viewer = Viewer()
-while True:
-    current_directory = os.path.abspath(os.curdir)
-    input_prefix = f'{current_directory} $> '
-    command = input(input_prefix).split()
-    if command[0] == 'lf':
-        viewer.list_files(current_directory)
-    elif command[0] == 'ccd':
-        viewer.change_current_directory(command[1])
-    elif command[0] == 'exit':
-        print('\nBye!')
+    def exit(self,):
+        print('Logout...')
         exit()
-    elif command[0] == 'clear':
-        viewer.clear()
-    else:
-        print(f'{system_errors_logo} Unknown command!')
+
+    def default(self,):
+        print(f'[PYCOMMANDER] - Unknown command!')
+
+
+viewer = Viewer()
+
+command_list = {
+    'ccd': viewer.change_current_directory,
+    'lf': viewer.list_files,
+    'exit': viewer.exit,
+    'clear': viewer.clear,
+}
+
+while True:
+    current_directory = os.getcwd()
+    input_prefix = f'{current_directory} $> '
+    command, *attrs = input(input_prefix).split()
+    if command != '':
+        call_program = command_list.get(command, viewer.default)
+        call_program(*attrs)
