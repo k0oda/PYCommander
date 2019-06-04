@@ -14,13 +14,13 @@ class Viewer():
         file_list = os.listdir(os.curdir)
         for file in file_list:
             if os.path.isdir(file):
-                type = 'Dir'
+                type = 'D'
             elif os.path.isfile(file):
-                type = 'File'
+                type = 'F'
             elif os.path.islink(file):
-                type = 'Link'
+                type = 'L'
             elif os.path.ismount(file):
-                type = 'Mount'
+                type = 'M'
             print(f'{file} | {type} | {os.path.getsize(file)} bytes')
         os.chdir(last_dir)
 
