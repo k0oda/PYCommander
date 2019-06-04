@@ -31,8 +31,9 @@ class Viewer():
         os.chdir(last_dir)
 
     def change_current_directory(self, *args):
-        if os.path.exists(args[0]):
-            os.chdir(args[0])
+        path = ' '.join(args)
+        if os.path.exists(path):
+            os.chdir(path)
         else:
             print(f'[PYCOMMANDER] - Folder not found!')
 
