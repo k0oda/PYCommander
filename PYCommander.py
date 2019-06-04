@@ -6,7 +6,11 @@ import os
 class Viewer():
     def list_files(self, *args):
         if len(args) >= 1:
-            target_dir = args[0]
+            if os.path.exists(args[0]):
+                target_dir = args[0]
+            else:
+                print(f'[PYCOMMANDER] - Folder not found!')
+                return
         else:
             target_dir = os.curdir
         last_dir = os.getcwd()
