@@ -80,6 +80,15 @@ class Editor():
         os.rename(src, dst)
         print(f'{src} -> {dst}')
 
+    def rm(self, *args):
+        path = ' '.join(args)
+        if os.path.exists(path):
+            os.remove(path)
+            print(f'- [FILE] {os.path.basename(path)}')
+        else:
+            print('[PYCOMMANDER] - Destination file does not exists!')
+            return
+
 
 viewer = Viewer()
 editor = Editor()
@@ -92,6 +101,7 @@ command_list = {
     'mkdir': editor.mkdir,
     'rmdir': editor.rmdir,
     'rename': editor.rename,
+    'rm': editor.rm,
 }
 
 while True:
