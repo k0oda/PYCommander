@@ -107,6 +107,10 @@ class Commander():
             print(self.messages.error_messages['dest_not_exists'])
             return
 
+    def sys(self, *args):
+        command = ' '.join(args)
+        os.system(command)
+
 
 cmd = Commander()
 
@@ -119,6 +123,7 @@ command_list = {
     'rmdir': cmd.rmdir,
     'rename': cmd.rename,
     'rm': cmd.rm,
+    'sys': cmd.sys,
 }
 
 while True:
