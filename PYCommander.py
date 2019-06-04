@@ -117,6 +117,25 @@ class Commander():
             print(f'~ {os.path.basename(path)}')
             os.startfile(path)
 
+    def help(self,):
+        print('''
+Welcome to PYCommander
+
+Available commands:
+------------------------------
+"ccd [path]" - Change Current Directory
+"lf ([path])" - List Files
+"mkdir [path]" - Make Directory
+"rmdir [path]" - Remove Directory
+"rename [old] [new]" - Rename file from <old> to <new>
+"rm [path]" - Remove file
+"sys [command]" - Command to external terminal
+"run [path]" - Run application
+"clear" - Clear screen
+"exit" - Exit from PYCommander
+------------------------------
+            ''')
+
 
 cmd = Commander()
 
@@ -131,6 +150,7 @@ command_list = {
     'rm': cmd.rm,
     'sys': cmd.sys,
     'run': cmd.run,
+    'help': cmd.help,
 }
 
 while True:
