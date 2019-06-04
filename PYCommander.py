@@ -55,7 +55,7 @@ class Editor():
         if os.path.exists(path):
             print('[PYCOMMANDER] - Folder already exists!')
         else:
-            os.mkdir(path)
+            os.makedirs(path)
             print(f'+ [DIR] {path}')
 
     def rmdir(self, *args):
