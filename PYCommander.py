@@ -153,6 +153,7 @@ command_list = {
     'help': cmd.help,
 }
 
+os.chdir('/')
 while True:
     current_directory = os.getcwd()
     input_prefix = f'{current_directory} $> '
