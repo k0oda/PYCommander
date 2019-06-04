@@ -35,7 +35,8 @@ class Viewer():
         last_dir = os.getcwd()
         os.chdir(target_dir)
         file_list = os.listdir(os.curdir)
-        print('{:<20} {:<15} {:<10}'.format('Filename', 'Type', 'Size (bytes)'))
+        print('\n{:<20} {:<15} {:<10}'.format('Filename', 'Type', 'Size (bytes)'))
+        print('-' * 50)
         for file in file_list:
             if os.path.isdir(file):
                 type = 'D'
@@ -47,6 +48,7 @@ class Viewer():
                 type = 'M'
             print('{:<20} |{:<15} |{:<10}'.format(
                 file, type, os.path.getsize(file)))
+        print('-' * 50 + '\n')
         os.chdir(last_dir)
 
     def change_current_directory(self, *args):
