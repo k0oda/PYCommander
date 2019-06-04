@@ -20,8 +20,11 @@ class Messages():
     }
 
 
-class Viewer():
+class Commander():
     messages = Messages()
+
+    def default(self, *_args):
+        print(self.messages.error_messages['unknown_command'])
 
     def list_files(self, *args):
         if len(args) >= 1:
@@ -65,13 +68,6 @@ class Viewer():
         print(self.messages.system_messages['exit'])
         exit()
 
-    def default(self, *_args):
-        print(self.messages.error_messages['unknown_command'])
-
-
-class Editor():
-    messages = Messages()
-
     def mkdir(self, *args):
         path = ' '.join(args)
         if os.path.exists(path):
@@ -112,18 +108,17 @@ class Editor():
             return
 
 
-viewer = Viewer()
-editor = Editor()
+cmd = Commander()
 
 command_list = {
-    'ccd': viewer.change_current_directory,
-    'lf': viewer.list_files,
-    'exit': viewer.exit,
-    'clear': viewer.clear,
-    'mkdir': editor.mkdir,
-    'rmdir': editor.rmdir,
-    'rename': editor.rename,
-    'rm': editor.rm,
+    'ccd': cmd.change_current_directory,
+    'lf': cmd.list_files,
+    'exit': cmd.exit,
+    'clear': cmd.clear,
+    'mkdir': cmd.mkdir,
+    'rmdir': cmd.rmdir,
+    'rename': cmd.rename,
+    'rm': cmd.rm,
 }
 
 while True:
@@ -133,5 +128,5 @@ while True:
         command, *attrs = input(input_prefix).split()
     except ValueError:
         continue
-    call_program = command_list.get(command, viewer.default)
+    call_program = command_list.get(command, cmd.default)
     call_program(*attrs)
