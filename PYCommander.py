@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import os
+import shutil
 
 
 class Viewer():
@@ -60,7 +61,7 @@ class Editor():
     def rmdir(self, *args):
         path = ' '.join(args)
         if os.path.exists(path):
-            os.removedirs(path)
+            shutil.rmtree(path)
             print(f'- [DIR] {path}')
         else:
             print('[PYCOMMANDER] - Folder does not exists!')
