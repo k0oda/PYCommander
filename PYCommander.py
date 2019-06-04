@@ -4,7 +4,13 @@ import os
 
 
 class Viewer():
-    def list_files(self,):
+    def list_files(self, *args):
+        if len(args) >= 1:
+            target_dir = args[0]
+        else:
+            target_dir = os.curdir
+        last_dir = os.getcwd()
+        os.chdir(target_dir)
         file_list = os.listdir(os.curdir)
         for file in file_list:
             if os.path.isdir(file):
@@ -16,6 +22,7 @@ class Viewer():
             elif os.path.ismount(file):
                 type = 'Mount'
             print(f'{file} | {type} | {os.path.getsize(file)} bytes')
+        os.chdir(last_dir)
 
     def change_current_directory(self, *args):
         if os.path.exists(args[0]):
