@@ -3,14 +3,32 @@
 import os
 import shutil
 
+class Messages():
+    symbol = '[PYCOMMANDER]'
+
+    error_messages = {
+    'folder_not_found': f'{symbol} - Folder not found!',
+    'unknown_command': f'{symbol} - Unknown command!',
+    'folder_exists': f'{symbol} - Folder already exists!',
+    'src_not_found': f'{symbol} - Source not found!',
+    'dest_exists': f'{symbol} - Destination name already exists!',
+    'dest_not_exists': f'{symbol} - Destination file does not exists!',
+    }
+
+    system_messages = {
+    'exit': f'{symbol} - Logout...'
+    }
+
 
 class Viewer():
+    messages = Messages()
+
     def list_files(self, *args):
         if len(args) >= 1:
             if os.path.exists(args[0]):
                 target_dir = args[0]
             else:
-                print(f'[PYCOMMANDER] - Folder not found!')
+                print(self.messages.error_messages['folder_not_found'])
                 return
         else:
             target_dir = os.curdir
@@ -36,24 +54,26 @@ class Viewer():
         if os.path.exists(path):
             os.chdir(path)
         else:
-            print(f'[PYCOMMANDER] - Folder not found!')
+            print(self.messages.error_messages['folder_not_found'])
 
     def clear(self,):
         print(chr(27) + "[2J")
 
     def exit(self,):
-        print('Logout...')
+        print(self.messages.system_messages['exit'])
         exit()
 
     def default(self, *_args):
-        print(f'[PYCOMMANDER] - Unknown command!')
+        print(self.messages.error_messages['unknown_command'])
 
 
 class Editor():
+    messages = Messages()
+
     def mkdir(self, *args):
         path = ' '.join(args)
         if os.path.exists(path):
-            print('[PYCOMMANDER] - Folder already exists!')
+            print(self.messages.error_messages['folder_exists'])
         else:
             os.makedirs(path)
             print(f'+ [DIR] {path}')
@@ -64,16 +84,16 @@ class Editor():
             shutil.rmtree(path)
             print(f'- [DIR] {path}')
         else:
-            print('[PYCOMMANDER] - Folder does not exists!')
+            print(self.messages.error_messages['folder_not_found'])
 
     def rename(self, *args):
         if os.path.exists(args[0]):
             src = args[0]
         else:
-            print('[PYCOMMANDER] - Source does not exists!')
+            print(self.messages.error_messages['src_not_found'])
             return
         if os.path.exists(args[1]):
-            print('[PYCOMMANDER] - Destination name already exists!')
+            print(self.messages.error_messages['dest_exists'])
             return
         else:
             dst = args[1]
@@ -86,7 +106,7 @@ class Editor():
             os.remove(path)
             print(f'- [FILE] {os.path.basename(path)}')
         else:
-            print('[PYCOMMANDER] - Destination file does not exists!')
+            print(self.messages.error_messages['dest_not_exists'])
             return
 
 
