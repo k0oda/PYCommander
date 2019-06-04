@@ -65,6 +65,20 @@ class Editor():
         else:
             print('[PYCOMMANDER] - Folder does not exists!')
 
+    def rename(self, *args):
+        if os.path.exists(args[0]):
+            src = args[0]
+        else:
+            print('[PYCOMMANDER] - Source does not exists!')
+            return
+        if os.path.exists(args[1]):
+            print('[PYCOMMANDER] - Destination name already exists!')
+            return
+        else:
+            dst = args[1]
+        os.rename(src, dst)
+        print(f'{src} -> {dst}')
+
 
 viewer = Viewer()
 editor = Editor()
@@ -76,6 +90,7 @@ command_list = {
     'clear': viewer.clear,
     'mkdir': editor.mkdir,
     'rmdir': editor.rmdir,
+    'rename': editor.rename,
 }
 
 while True:
