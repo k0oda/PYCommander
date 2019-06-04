@@ -111,6 +111,12 @@ class Commander():
         command = ' '.join(args)
         os.system(command)
 
+    def run(self, *args):
+        path = ' '.join(args)
+        if os.path.exists(path):
+            print(f'~ {os.path.basename(path)}')
+            os.startfile(path)
+
 
 cmd = Commander()
 
@@ -124,6 +130,7 @@ command_list = {
     'rename': cmd.rename,
     'rm': cmd.rm,
     'sys': cmd.sys,
+    'run': cmd.run,
 }
 
 while True:
