@@ -48,13 +48,34 @@ class Viewer():
         print(f'[PYCOMMANDER] - Unknown command!')
 
 
+class Editor():
+    def mkdir(self, *args):
+        path = ' '.join(args)
+        if os.path.exists(path):
+            print('[PYCOMMANDER] - Folder already exists!')
+        else:
+            os.mkdir(path)
+            print(f'+ [DIR] {path}')
+
+    def rmdir(self, *args):
+        path = ' '.join(args)
+        if os.path.exists(path):
+            os.removedirs(path)
+            print(f'- [DIR] {path}')
+        else:
+            print('[PYCOMMANDER] - Folder does not exists!')
+
+
 viewer = Viewer()
+editor = Editor()
 
 command_list = {
     'ccd': viewer.change_current_directory,
     'lf': viewer.list_files,
     'exit': viewer.exit,
     'clear': viewer.clear,
+    'mkdir': editor.mkdir,
+    'rmdir': editor.rmdir,
 }
 
 while True:
